@@ -85,9 +85,9 @@ def filling_missing_parts ():
     wb = xlrd.open_workbook(location)
     sheet = wb.sheet_by_index(0)
     # create new exel file without missing data
-    for i in range(1, sheet.ncols):  # move on each attribute
-        for j in range(1, sheet.nrows):
-            if (sheet.cell_value(j, i) == 'null'):
+    for i in range(0, sheet.ncols):  # move on each attribute
+        for j in range(0, sheet.nrows):
+            if (sheet.cell_value(j, i) == 'null' or sheet.cell_value(j, i) == 'NULL' or sheet.cell_value(j, i) == ''):
                 sheet1.write(j, i, most_common[i])
             else:
                 sheet1.write(j, i, sheet.cell_value(j, i))
@@ -110,6 +110,7 @@ def main():
     # Reading and separating the data to train and test
     data, classifications = read_data()
     train, test = separate_data(data)
+
 
 
 
